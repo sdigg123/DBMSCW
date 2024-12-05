@@ -37,10 +37,10 @@ CREATE TABLE Minister (
 
 CREATE TABLE Statement (
     statementId INT(10) PRIMARY KEY,
-    personId INT(7),
+    ministerId INT(7),
     statementContent VARCHAR(3000),
     dateCreated DATE,
-    FOREIGN KEY (minsterId) REFERENCES Minister(ministerId)
+    FOREIGN KEY (ministerId) REFERENCES Minister(ministerId)
 );
 
 CREATE TABLE WaitingList (
