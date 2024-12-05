@@ -1,51 +1,51 @@
 CREATE TABLE Country (
-    countryId INT(1) PRIMARY KEY,
+    countryId INT PRIMARY KEY,
     countryName VARCHAR(15)
 );
 
 CREATE TABLE County (
-    countyId INT(2) PRIMARY KEY,
+    countyId INT PRIMARY KEY,
     countyName VARCHAR(100),
-    countryId INT(1),
+    countryId INT,
     FOREIGN KEY (countryId) REFERENCES Country(countryId)
 );
 
 CREATE TABLE District (
-    districtId INT(6) PRIMARY KEY,
+    districtId INT PRIMARY KEY,
     districtName VARCHAR(255),
-    countyId INT(2),
+    countyId INT,
     FOREIGN KEY (countyId) REFERENCES County(countyId)
 );
 
 CREATE TABLE Person (
-    Id INT(7) PRIMARY KEY,
+    Id INT PRIMARY KEY,
     firstName VARCHAR(100),
     lastName VARCHAR(100),
     dateOfBirth DATE,
     gender VARCHAR(255),
     employment VARCHAR(255),
     profession VARCHAR(255),
-    districtId INT(6),
+    districtId INT,
     FOREIGN KEY (districtId) REFERENCES District(districtId)
 );
 
 CREATE TABLE Minister (
-    ministerId INT(7) PRIMARY KEY,
-    countryId INT(1),
+    ministerId INT PRIMARY KEY,
+    countryId INT,
     FOREIGN KEY (countryId) REFERENCES Country(countryId)
 );
 
 CREATE TABLE Statement (
-    statementId INT(10) PRIMARY KEY,
-    ministerId INT(7),
+    statementId INT PRIMARY KEY,
+    ministerId INT,
     statementContent VARCHAR(3000),
     dateCreated DATE,
     FOREIGN KEY (ministerId) REFERENCES Minister(ministerId)
 );
 
 CREATE TABLE WaitingList (
-    waitingListId INT(10) PRIMARY KEY,
-    personId INT(7),
+    waitingListId INT PRIMARY KEY,
+    personId INT,
     estimatedWait TIME,
     type VARCHAR(255),
     dateAdded DATE,
@@ -53,9 +53,9 @@ CREATE TABLE WaitingList (
 );
 
 CREATE TABLE Appointment (
-    appointmentId INT(10) PRIMARY KEY,
+    appointmentId INT PRIMARY KEY,
     personId INT(7),
-    waitingListId INT(10),
+    waitingListId INT,
     date DATE,
     type VARCHAR(255),
     location VARCHAR(255),
@@ -64,14 +64,14 @@ CREATE TABLE Appointment (
 );
 
 CREATE TABLE Professional (
-    professionalId INT(7) PRIMARY KEY,
+    professionalId INT PRIMARY KEY,
     specialisation VARCHAR(255),
     FOREIGN KEY (professionalId) REFERENCES Person(Id)
 );
 
 CREATE TABLE AssignedProfessionals (
-    appointmentId INT(10),
-    professionalId INT(7),
+    appointmentId INT,
+    professionalId INT,
     PRIMARY KEY (appointmentId, professionalId),
     FOREIGN KEY (appointmentId) REFERENCES Appointment(appointmentId),
     FOREIGN KEY (professionalId) REFERENCES Professional(professionalId)
