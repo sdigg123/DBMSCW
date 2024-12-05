@@ -21,7 +21,7 @@ CREATE TABLE Person (
     Id INT PRIMARY KEY,
     firstName VARCHAR(100),
     lastName VARCHAR(100),
-    dateOfBirth DATE,
+    dateOfBirth VARCHAR(10), 
     gender VARCHAR(255),
     employment VARCHAR(255),
     profession VARCHAR(255),
@@ -39,24 +39,24 @@ CREATE TABLE Statement (
     statementId INT PRIMARY KEY,
     ministerId INT,
     statementContent VARCHAR(3000),
-    dateCreated DATE,
+    dateCreated VARCHAR(10), 
     FOREIGN KEY (ministerId) REFERENCES Minister(ministerId)
 );
 
 CREATE TABLE WaitingList (
     waitingListId INT PRIMARY KEY,
     personId INT,
-    estimatedWait TIME,
+    estimatedWait VARCHAR(50),
     type VARCHAR(255),
-    dateAdded DATE,
+    dateAdded VARCHAR(10), 
     FOREIGN KEY (personId) REFERENCES Person(Id)
 );
 
 CREATE TABLE Appointment (
     appointmentId INT PRIMARY KEY,
-    personId INT(7),
+    personId INT,
     waitingListId INT,
-    date DATE,
+    appointmentDate VARCHAR(10), 
     type VARCHAR(255),
     location VARCHAR(255),
     FOREIGN KEY (personId) REFERENCES Person(Id),
@@ -137,6 +137,7 @@ INSERT INTO Minister VALUES
 (9, 9), 
 (10, 10);
 
+
 INSERT INTO Statement VALUES
 (1, 1, 'Economic reform needed', '2023-01-01'),
 (2, 2, 'Health is priority', '2023-02-01'),
@@ -150,28 +151,28 @@ INSERT INTO Statement VALUES
 (10, 10, 'Economic growth focus', '2023-10-01');
 
 INSERT INTO WaitingList VALUES
-(1, 1, '00:30:00', 'Consultation', '2023-03-01'),
-(2, 2, '01:00:00', 'Surgery', '2023-03-05'),
-(3, 3, '00:45:00', 'Checkup', '2023-03-10'),
-(4, 4, '00:20:00', 'Dental', '2023-03-15'),
-(5, 5, '01:30:00', 'Operation', '2023-03-20'),
-(6, 6, '00:25:00', 'Vaccination', '2023-03-25'),
-(7, 7, '00:50:00', 'Therapy', '2023-03-30'),
-(8, 8, '00:40:00', 'Diagnosis', '2023-04-05'),
-(9, 9, '01:20:00', 'Consultation', '2023-04-10'),
-(10, 10, '00:55:00', 'Follow-up', '2023-04-15');
+(1, 1, '0 0:30:00', 'Consultation', '2023-03-01'),
+(2, 2, '0 1:00:00', 'Surgery', '2023-03-05'),
+(3, 3, '0 0:45:00', 'Checkup', '2023-03-10'),
+(4, 4, '0 0:20:00', 'Dental', '2023-03-15'),
+(5, 5, '0 1:30:00', 'Operation', '2023-03-20'),
+(6, 6, '0 0:25:00', 'Vaccination', '2023-03-25'),
+(7, 7, '0 0:15:00', 'Consultation', '2023-03-30'),
+(8, 8, '0 1:00:00', 'Surgery', '2023-04-01'),
+(9, 9, '0 0:50:00', 'Checkup', '2023-04-05'),
+(10, 10, '0 0:35:00', 'Dental', '2023-04-10');
 
 INSERT INTO Appointment VALUES
 (1, 1, 1, '2023-04-01', 'Consultation', 'City Hospital'),
-(2, 2, 2, '2023-05-01', 'Surgery', 'County Clinic'),
-(3, 3, 3, '2023-06-01', 'Checkup', 'Central Clinic'),
-(4, 4, 4, '2023-07-01', 'Dental', 'Downtown Dental'),
-(5, 5, 5, '2023-08-01', 'Operation', 'Regional Hospital'),
-(6, 6, 6, '2023-09-01', 'Vaccination', 'Health Center'),
-(7, 7, 7, '2023-10-01', 'Therapy', 'Wellness Center'),
-(8, 8, 8, '2023-11-01', 'Diagnosis', 'Diagnostic Lab'),
-(9, 9, 9, '2023-12-01', 'Consultation', 'General Hospital'),
-(10, 10, 10, '2024-01-01', 'Follow-up', 'Specialist Clinic');
+(2, 2, 2, '2023-04-02', 'Checkup', 'General Clinic'),
+(3, 3, 3, '2023-04-03', 'Surgery', 'Private Hospital'),
+(4, 4, 4, '2023-04-04', 'Dental', 'Dental Center'),
+(5, 5, 5, '2023-04-05', 'Operation', 'Surgery Clinic'),
+(6, 6, 6, '2023-04-06', 'Vaccination', 'Health Center'),
+(7, 7, 7, '2023-04-07', 'Checkup', 'General Hospital'),
+(8, 8, 8, '2023-04-08', 'Consultation', 'Clinic 8'),
+(9, 9, 9, '2023-04-09', 'Dental', 'Health Clinic'),
+(10, 10, 10, '2023-04-10', 'Surgery', 'Private Health Center');
 
 INSERT INTO Professional VALUES 
 (1, 'General Practitioner'), 
@@ -185,7 +186,7 @@ INSERT INTO Professional VALUES
 (9, 'Pediatrician'), 
 (10, 'Neurologist');
 
-INSERT INTO AssignedProfessionals VALUES 
+INSERT INTO AssignedProfessionals VALUES
 (1, 1), 
 (2, 2), 
 (3, 3), 
